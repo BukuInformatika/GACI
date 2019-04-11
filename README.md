@@ -1,2 +1,2 @@
 # GACI
-Implementasi Genetik Algoritma Menggunakan Code Igniter
+Implementasi Algoritma Genetika Menggunakan CodeIgniter
