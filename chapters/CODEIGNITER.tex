@@ -54,37 +54,52 @@ Di dalam folder application/config/ terdapat berbagai macam file konfigurasi yan
 Pada konfigurasi yang saya lakukan hanya melukakan konfigurasi pada file autoload.php, config.php, database.php dan routes.php. Berikut cara konfigurasinya:
 \begin{enumerate}
     \item Autoload.php
-		\begin{figure}[!htbp]
-    		\centering
-    		\includegraphics[width=0.5\textwidth]{figures/CodeIgniter2.PNG}
-    		\label{CodeIgniter2}
-		\end{figure}
-		\par Pada file ini saya meng-input libraries untuk support framework CodeIgniter ini terhadap database, \verb|form_validation| yang akan dibuat nantinya, pagination dan Session untuk mengaktifkan session pada CodeIgniter.
-        Pada variable autoload helper saya meng-input url dan form semua di inputkan sesuai dengan kebutuhan pembuat aplikasi. Array tersebut akan di eksekusi secara automatis oleh CodeIgniter.
+		\par Pada file ini saya meng-input libraries untuk support framework CodeIgniter ini terhadap database, \verb|form_validation| yang akan dibuat nantinya, pagination dan Session untuk mengaktifkan session pada CodeIgniter. Pada variable autoload helper saya meng-input url dan form semua di inputkan sesuai dengan kebutuhan pembuat aplikasi. Array tersebut akan di eksekusi secara automatis oleh CodeIgniter.
+\begin{lstlisting}
+$autoload['libraries'] = array('database','session','form_validation','pagination');
+$autoload['helper'] = array('url','form','html');
+\end{lstlisting}
 
     \item Config.php
-		\begin{figure}[!htbp]
-    		\centering
-    		\includegraphics[width=0.5\textwidth]{figures/CodeIgniter3.PNG}
-    		\label{CodeIgniter3}
-		\end{figure}
-        \par Pada config.php inputkan url utama aplikasi pada variable config \verb|base_url| seperti pada gambar diatas.
+        \par Pada config.php inputkan url utama aplikasi pada variable config \verb|base_url| seperti pada codingan dibawah:
+\begin{lstlisting}
+$config['base_url']	= 'http://localhost/algoritma_genetika/';
+\end{lstlisting}
         
     \item Database.php
-		\begin{figure}[!htbp]
-    		\centering
-    		\includegraphics[width=0.6\textwidth]{figures/CodeIgniter4.PNG}
-    		\label{CodeIgniter4}
-		\end{figure}
 		\par Pada database.php konfigurasi yang dilakukan untuk mengkoneksikan database yaitu MySQL dengan aplikasi web berbasis framework CodeIgniter. Dapat dilihat pada line 72, hostname yang diiniputkan sesuai dengan hostname yang dipakai, disini saya menginputkna localhost dengan username default yaitu root password dikosongkan karena pada Xampp saya tidak menggunakan password. Pada database line 75 inputkan nama database sesuai dengan nama database yang ada pada MySQL.
+\begin{lstlisting}
+$active_group = 'default';
+$query_builder = TRUE;
+$db['default'] = array(
+	'dsn'	=> '',
+	'hostname' => 'localhost',
+	'username' => 'root',
+	'password' => '',
+	'database' => 'produk_ga_fs',
+	'dbdriver' => 'mysqli',
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => (ENVIRONMENT !== 'production'),
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);
+\end{lstlisting}
 		
 	\item Routes.php
-		\begin{figure}[!htbp]
-    		\centering
-    		\includegraphics[width=0.7\textwidth]{figures/CodeIgniter5.PNG}
-    		\label{CodeIgniter5}
-		\end{figure}
 		\par Pada file ini dilakukan konfigurasi dimana controller mana yang akan pertama di eksekusi ketika url dijalankan.
+\begin{lstlisting}
+$route['default_controller'] = "CTRL_Dashboard";
+$route['404_override'] = '';
+\end{lstlisting}
 \end{enumerate}
 
 \section{Konfigurasi Bootstrap dan Template CodeIgniter 3}
@@ -103,23 +118,322 @@ Ada berbagai macam konfigurasi bootstrap dan template terhadap CodeIgniter, baik
 	\item Copy isi dari index.html yang ada dalam assets kemudian buat file di dalam application/views/namafile.php dengan format .php dan pastekan dalam file tersebut.
 	\item Kemudian pisahkan antara header dan footer aplikasi anda.
 	\item Pertama lakukan konfigurasi terhadap header dengan cara memanggil link dan script yang sudah di copy di dalam assets, berikut contoh pemanggilanya:
-		\begin{figure}[!htbp]
-    		\centering
-    		\includegraphics[width=0.5\textwidth]{figures/TBCI2.PNG}
-    		\label{TBCI2}
-		\end{figure}
-		\par Lakukan pemanggilan terhadap semua code yang berbau href dan src dengan mengisikan kodingan seperti echo \verb|base_url|/assets/linkygdituju, terlihat seperti gambar diatas. Lakukan hal yang sama terhadap footer.php. Setelah itu simpan.
+\begin{lstlisting}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Penjadwalan Expediting</title>
+
+    <link href="<?php echo base_url('assets/vendor/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/vendor/metisMenu/metisMenu.min.css'); ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/dist/css/sb-admin-2.css'); ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/vendor/morrisjs/morris.css'); ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/vendor/font-awesome/css/font-awesome.min.css'); ?>" rel="stylesheet" type="text/css">
+    <script src="<?php echo base_url('assets/vendor/jquery/jquery.min.js'); ?>"></script>
+
+    <!-- Tabel Responsive -->
+    <link href="<?php echo base_url('assets/vendor/datatables-plugins/dataTables.bootstrap.css'); ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/vendor/datatables-responsive/dataTables.responsive.css'); ?>" rel="stylesheet">
+
+    <!-- DatePicker -->
+    <link href="<?php echo base_url('assets/datepicker/datepicker.css'); ?>" rel="stylesheet">
+    <script type="text/javascript" src="<?php echo base_url('assets/datepicker/datepicker.js'); ?>"></script>
+
+    <style type="text/css">
+         body .frmModalMsg {
+            width: 740px;
+            margin-left: -280px;
+         }
+   
+         #line-chart {
+            height:300px;
+            width:800px;
+            margin: 0px auto;
+            margin-top: 1em;
+         }
+         .brand { font-family: georgia, serif; }
+         .brand .first {
+         color: #ccc;
+            font-style: italic;
+         }
+         .brand .second {
+            color: #fff;
+            font-weight: bold;
+         }
+         
+         #loading-div-background{
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: #fff;
+            width: 100%;
+            height: 100%;
+        }
+        
+        #loading-div{
+            width: 300px;
+            height: 150px;
+            background-color: #fff;
+            border: 5px solid #1468b3;
+            text-align: center;
+            color: #202020;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -150px;
+            margin-top: -100px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+        }
+      </style>
+
+      <script type="text/javascript">
+        $(document).ready(function (){
+            $("#loading-div-background").css({ opacity: 0.5 });
+         <?php if(isset($clear_text_box)) { ?>    
+            $('input[type=text]').each(function() {
+                $(this).val('');
+            });
+         <?php } ?>
+        });
+    
+        function ShowProgressAnimation(){
+            $("#loading-div-background").show();
+        }
+         
+         function change_get(){     
+            var semester_tipe = document.getElementById('semester_tipe');
+            var tahun_akademik = document.getElementById('tahun_akademik');
+            window.location.href = "<?php echo base_url().'web/pengampu/' ?>" + semester_tipe.options[semester_tipe.selectedIndex].value  + "/"   + tahun_akademik.options[tahun_akademik.selectedIndex].value;     
+         }
+         
+         function change_dosen_tidak_bersedia() {
+            var kode_dosen = document.getElementById('kode_dosen');         
+            window.location.href = "<?php echo base_url().'web/waktu_tidak_bersedia/' ?>" + kode_dosen.options[kode_dosen.selectedIndex].value;     
+         }
+         
+        function get_matakuliah() {        
+            var semester_tipe = document.getElementById('semester_tipe');
+            $.ajax({
+               type:"POST",
+               async   : false,
+               cache   : false,
+               url: "<?php echo base_url()?>web/option_matakuliah_ajax/" + semester_tipe.options[semester_tipe.selectedIndex].value,
+               success: function(msg){
+                  //alert(msg);
+                  $('#option_matakuliah').html(msg);
+               }
+            });
+            return false;        
+        }
+
+        function delete_row(link,kode) {
+            var answer =  confirm('Anda yakin ingin menghapus data ini?');
+            if(answer){
+               $.ajax({
+                  type:"POST",
+                  async   : false,
+                  cache   : false,
+                  url: "<?php echo base_url()?>" + link + kode,
+                  success: function(msg){
+                     var tr  = $('#row_' + kode);
+                     tr.css("background-color","#FF3700");
+                     tr.fadeOut(400, function(){
+                       tr.remove();
+                     });                  
+                  }
+               });
+            }
+            return false;
+        }
+        
+        $(function() {
+                applyPagination();
+                function applyPagination() {
+                 $("#ajax_paging a").click(function() {             
+                   var url = $(this).attr("href");
+                   $.ajax({
+                     type: "POST",
+                     data: "ajax=1",
+                     url: url, 
+                     success: function(msg) {
+                       $('#content_ajax').fadeOut(0,function(){
+                           $('#content_ajax').html(msg);
+                           $("#content_ajax").removeAttr("style");
+                           applyPagination();                 
+                       }).fadeIn(0);                       
+                     }
+                   });              
+                   return false;
+                 });
+               }
+             });
+      </script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="<?php echo base_url();?>">Algoritma Genetika</a>
+            </div>
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="<?php echo base_url();?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-files-o fa-fw"></i> Data<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <?php echo anchor('Web/index_vendor', '<i class="fa fa-file-text fa-fw"></i> Vendor'); ?>
+                                </li>
+                                <li>
+                                    <?php echo anchor('Web/index_barang', '<i class="fa fa-file-text fa-fw"></i> Barang'); ?>
+                                </li>
+                                <li>
+                                    <?php echo anchor('Web/index_bulan_tahun', '<i class="fa fa-file-text fa-fw"></i> Bulan Dan Tahun'); ?>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <?php echo anchor('web/index_jadwal', '<i class="fa fa-table fa-fw"></i> Jadwal'); ?>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+\end{lstlisting}
+		\par Lakukan pemanggilan terhadap semua code yang berbau href dan src dengan mengisikan kodingan seperti echo \verb|base_url/assets/link_yg_dituju|, terlihat seperti pada codingan diatas. Lakukan hal yang sama terhadap file footer.php. Setelah itu simpan.
 		
 	\item Selanjutnya membuat file untuk tampilan awal yaitu index.php atau dashboard.php
-	\item Edit beberapa codingan yang sudah dipastekan tadi dari assets/index.html ke application/views/index.php sesuai dengan tampilan yang diinginkan. Apabila memisahkan header dan footer jangan lupa untuk memanggil header footer tersebut dengan cara berikut:
-		\begin{figure}[!htbp]
-    		\centering
-    		\includegraphics[width=0.5\textwidth]{figures/TBCI4.PNG}
-    		\label{TBCI4}
-		\end{figure}
-	    \par Load view berarti meload file yang ada di dalam folder view dalam artian codingan diatas akan meload file header yang ada di folder application/views/page/header. Simpan semua konfigurasi dan coba jalankan.
+	\item Edit beberapa codingan yang sudah dipastekan tadi dari assets/index.html ke application/views/dasboard.php sesuai dengan tampilan yang diinginkan. Apabila memisahkan header dan footer jangan lupa untuk memanggil header footer. Berikut codingan full dari dasboard.php:
+\begin{lstlisting}
+<?php $this->load->view('page/header') ?>
+
+<div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Dashboard</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-tasks fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">Data</div>
+                            <div>Vendor</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="<?php echo base_url()?>index.php/Web/index_vendor">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-green">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-tasks fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">Data</div>
+                            <div>Barang</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="<?php echo base_url()?>index.php/Web/index_barang">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-yellow">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-tasks fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">Data</div>
+                            <div>Bulan Dan Tahun</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="<?php echo base_url()?>index.php/Web/index_bulan_tahun">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-table fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">Data</div>
+                            <div>Jadwal</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="<?php echo base_url()?>index.php/Web/index_jadwal">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+    </div>
+</div>
+
+<?php $this->load->view('page/footer') ?>
+\end{lstlisting}
+	    \par Load view berarti meload file yang ada di dalam folder view, dalam artian codingan diatas akan meload file header yang ada di folder application/views/page/header, begitu pun dengan file footer.php. Simpan semua konfigurasi dan coba jalankan.
 	    
-    \item Berikut tampilan yang saya modifikasi dari index.html menjadi dashboard.php
+    \item Berikut hasil dari codingan dashboard.php.
 		\begin{figure}[!htbp]
     		\centering
     		\caption{Tampilan Awal Template / Bootsrap CodeIgniter 3}
@@ -134,59 +448,62 @@ Ada berbagai macam konfigurasi bootstrap dan template terhadap CodeIgniter, baik
     \begin{enumerate}
         \item Buat table sesuai dengan kebutuhan aplikasi
         \item Kemudian buat file baru dengan format .php pada application/models
-        \item Pastekan codingan dibawah ini
-            \par \verb|<?php|\par
-            \verb|class MDL_Barang extends CI_Model{|\par
-            \verb|function __construct(){|\par
-            \verb|parent::__construct();|\par
-            \verb|}|\par
-            \verb|public function get_barang(){|\par
-            \verb|$hasil=$this->db->get('barang');|\par
-            \verb|if($hasil->num_rows() > 0){|\par
-            \verb|return $hasil->result();|\par
-            \verb|}else{|\par
-            \verb|return false;|\par
-            \verb|}|\par
-            \verb|}|\par
-            
-            \verb|public function insert_barang($barang_data)|\par
-            \verb|{|\par
-            \verb|$this->db->insert('barang',$barang_data);|\par
-            \verb|}|\par
-            
-            \verb|public function find_barang($kode_barang)|\par
-            \verb|{|\par
-            \verb|$hasil = $this->db->where('kode_barang',$kode_barang)->limit(1)->get('barang');|\par
-            \verb|if($hasil->num_rows() > 0){|\par
-            \verb|return $hasil->row();|\par
-            \verb|}else{|\par
-            \verb|return array();|\par
-            \verb|}|\par
-            \verb|}|\par
-            
-            \verb|public function update_barang($kode_barang, $barang_data)|\par
-            \verb|{|\par
-            \verb|$this->db->where('kode_barang',$kode_barang)|\par
-            \verb|->update('barang',$barang_data);|\par
-            \verb|}|\par
-            	
-            \verb|public function delete_barang($kode_barang)|\par
-            \verb|{|\par
-            \verb|$this->db->where('kode_barang',$kode_barang)|\par
-            \verb|->delete('barang');|\par
-            \verb|}|\par
-            
-            \verb|public function detail_barang($kode_barang)|\par
-            \verb|{|\par
-            \verb|$hasil = $this->db->where('kode_barang',$kode_barang)->limit(1)->get('barang');|\par
-            \verb|if($hasil->num_rows() > 0){|\par
-            \verb|return $hasil->result();|\par
-            \verb|}else{|\par
-            \verb|return array();|\par
-            \verb|}|\par
-            \verb|}|\par
-            \verb|}|\par
+        \item Pada tahap inin saya akan membuat model untuk table barang, berikut codingan yang saya gunakan:
+\begin{lstlisting}
+<?php
+class MDL_Barang extends CI_Model{
+	function __construct(){
+		parent::__construct();
+	}
+    
+    public function get_barang(){
+		$hasil=$this->db->get('barang');
+		if($hasil->num_rows() > 0){
+			return $hasil->result();
+		}else{
+			return false;
+        }
+    }
 
+	public function insert_barang($barang_data)
+	{
+		$this->db->insert('barang',$barang_data);
+	}
+
+	public function find_barang($kode_barang)
+	{
+		$hasil = $this->db->where('kode_barang',$kode_barang)->limit(1)->get('barang');
+		if($hasil->num_rows() > 0){
+			return $hasil->row();
+		}else{
+			return array();
+		}
+	}
+
+	public function update_barang($kode_barang, $barang_data)
+	{
+		$this->db->where('kode_barang',$kode_barang)
+		->update('barang',$barang_data);	
+	}
+	
+	public function delete_barang($kode_barang)
+	{
+		$this->db->where('kode_barang',$kode_barang)
+		->delete('barang');
+	}
+
+	public function detail_barang($kode_barang)
+	{
+		$hasil = $this->db->where('kode_barang',$kode_barang)->limit(1)->get('barang');
+		if($hasil->num_rows() > 0){
+			return $hasil->result();
+		}else{
+			return array();
+		}
+	}
+}
+\end{lstlisting}
+            
         \par Penjelasan:
         \begin{enumerate}
             \item function \verb|get_barang| berfungsi untuk meload semua data yang ada di database barang
@@ -199,75 +516,383 @@ Ada berbagai macam konfigurasi bootstrap dan template terhadap CodeIgniter, baik
             \par Function-function di atas merupakan function dasar untuk melakukan proses CRUD di model CodeIgniter 3.
         \end{enumerate}
     \end{enumerate}
+    
     \item Konfigurasi Controller
     \begin{enumerate}
         \item Buat file baru dengan format .php di folder application/controller, kemudian buat beberapa function crud
-        \item Function pertama adalah function \verb|index_barang|, untuk menampilakn seluruh data yang ada pada table barang
-    		\begin{figure}[!htbp]
-        		\centering
-        		\includegraphics[width=0.5\textwidth]{figures/Controller1.PNG}
-        		\label{Controller1}
-    		\end{figure}
+        \item dalam file ini, load semua model agar semua function disatukan dalam satu file, seperti pada codingan dibawah:
+\begin{lstlisting}
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+class Web extends CI_Controller
+{
+	function __construct()
+    {
+        parent::__construct();
+		$this->load->model(array('MDL_Vendor',
+								 'MDL_Barang',
+								 'MDL_Bulan_Tahun',
+								 'MDL_Hari',
+								 'MDL_Jam',
+								 'MDL_Pengampu',
+								 'MDL_Waktu_Tidak_Bersedia',
+								 'MDL_Jadwal'));
+		include_once("genetik.php");
+		define('IS_TEST','FALSE');
+    }
+\end{lstlisting}
     		
-        \item Function kedua yaitu function \verb|add_barang|, untuk melakukan proses input data dalam bentuk variable sesuai dengan field yang ada pada table barang  yang kemudian variable tersebut akan di lempar ke model untuk di inputkna kedalam table
-    		\begin{figure}[!htbp]
-        		\centering
-        		\includegraphics[width=0.5\textwidth]{figures/Controller2.PNG}
-        		\label{Controller2}
-    		\end{figure}
+    	\item Kemudian buat function pertama yaitu function \verb|index_barang|, untuk menampilakn seluruh data yang ada pada table barang.
+\begin{lstlisting}
+public function index_barang(){
+    $data['barang'] = $this->MDL_Barang->get_barang();
+    $this->load->view('web/barang/index_barang', $data);
+}
+\end{lstlisting}
     		
-    	\item Selanjutnya function \verb|edit_barang|, untuk melakukan proses edit data barang yang kemudian variable yang di tampung akan di execute pada model function \verb|update_barang|
-    		\begin{figure}[!htbp]
-        		\centering
-        		\includegraphics[width=0.5\textwidth]{figures/Controller3.PNG}
-        		\label{Controller3}
-    		\end{figure}
+        \item Function kedua yaitu function \verb|add_barang|, untuk melakukan proses input data dalam bentuk variable sesuai dengan field yang ada pada table barang  yang kemudian variable tersebut akan di lempar ke model untuk di inputkan kedalam table.
+\begin{lstlisting}
+public function add_barang()
+{
+	$this->form_validation->set_rules('nama_barang','Nama barang','required');
+	$this->form_validation->set_rules('kategori_barang','Kategori Barang','required');
+	$this->form_validation->set_rules('tingkat_kebutuhan','Tingkat Kebutuhan','required');
+	$this->form_validation->set_rules('jumlah_dalam_kategori','Jumlah Dalam Kategori','required');
+	
+	if($this->form_validation->run() == FALSE){
+        $this->load->view('web/barang/form_add_barang');
+	}else{
+		$barang_data = array (
+			'nama_barang'			=> set_value('nama_barang'),
+			'kategori_barang'		=> set_value('kategori_barang'),
+			'tingkat_kebutuhan'		=> set_value('tingkat_kebutuhan'),
+			'jumlah_dalam_kategori'	=> set_value('jumlah_dalam_kategori')
+		);
+		$this->MDL_Barang->insert_barang($barang_data);
+		$this->session->set_flashdata('notif','Data Berhasil Di Simpan');
+		redirect('web/index_barang');	
+	}
+}
+\end{lstlisting}
     		
-    	\item Function \verb|delete_barang|, untuk melakukan hapus data berdasarkan id yang di execute
-    		\begin{figure}[!htbp]
-        		\centering
-        		\includegraphics[width=0.5\textwidth]{figures/Controller4.PNG}
-        		\label{Controller4}
-    		\end{figure}
+    	\item Selanjutnya function \verb|edit_barang|, untuk melakukan proses edit data barang yang kemudian variable yang di tampung akan di execute pada model function \verb|update_barang|.
+\begin{lstlisting}
+public function edit_barang($kode_barang)
+{
+	$this->form_validation->set_rules('nama_barang','Nama barang','required');
+	$this->form_validation->set_rules('kategori_barang','Kategori Barang','required');
+	$this->form_validation->set_rules('tingkat_kebutuhan','Tingkat Kebutuhan','required');
+	$this->form_validation->set_rules('jumlah_dalam_kategori','Jumlah Dalam Kategori','required');
+	
+	if($this->form_validation->run() == FALSE){
+		$data['barang'] = $this->MDL_Barang->find_barang($kode_barang);
+		$this->load->view('web/barang/form_edit_barang', $data);
+	}else{
+		$barang_data = array (
+			'nama_barang'			=> set_value('nama_barang'),
+			'kategori_barang'		=> set_value('kategori_barang'),
+			'tingkat_kebutuhan'		=> set_value('tingkat_kebutuhan'),
+			'jumlah_dalam_kategori'	=> set_value('jumlah_dalam_kategori')
+		);
+		$this->MDL_Barang->update_barang($kode_barang, $barang_data);
+		redirect('web/index_barang');
+	}	
+}
+\end{lstlisting}
+    		
+    	\item Function \verb|delete_barang|, untuk melakukan hapus data berdasarkan id yang di execute.
+\begin{lstlisting}
+public function delete_barang($kode_barang)
+{
+	$this->MDL_Barang->delete_barang($kode_barang);
+	redirect('web/index_barang');	
+}
+\end{lstlisting}
     \end{enumerate}
     
     \item Konfigurasi Views
     \begin{enumerate}
         \item Buat file  baru pada application/views dengan format .php kemdian buat desain untuk meanmpilakn data dari table barang, berikut contoh codingan untuk vies data barang
-    		\begin{figure}[!htbp]
-        		\centering
-        		\includegraphics[width=0.7\textwidth]{figures/Views1.PNG}
-        		\label{Views1}
-    		\end{figure}
+\begin{lstlisting}
+<?php $this->load->view('page/header') ?>
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Barang</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <?=anchor('Web/add_barang','Tambah Data Barang',['class'=>'btn btn-primary btn-sm','style'=>'float:left;'])?>
+                    <div style="clear: both;"></div>
+                </ol>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="container table-responsive">
+                <div class="col-lg-11">
+                    <table id="dataTables-example" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="header">Nama Barang</th>
+                            <th class="header">Kategori Barang</th>
+                            <th class="header">#</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($barang as $row) : ?> 
+                        <tr>
+                            <td><?=$row->nama_barang?></td>
+                            <td><?=$row->kategori_barang?></td>
+                            <td>
+                                <center>
+                                    <?=anchor('Web/detail_barang/' . $row->kode_barang,'Detail',['class'=>'btn btn-info btn-sm'])?>
+                                    <?=anchor('Web/edit_barang/' . $row->kode_barang,'Ubah',['class'=>'btn btn-default btn-sm'])?>
+                                    <?=anchor('Web/delete_barang/' . $row->kode_barang,'Hapus',['class'=>'btn btn-danger btn-sm','onclick'=>'return confirm(\'Apakah Anda Yakin ?\')'])?>
+                                </center>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php $this->load->view('page/footer') ?>
+\end{lstlisting}
     		
-    	\item Buat file baru lagi untuk view tambah barang
-    		\begin{figure}[!htbp]
-        		\centering
-        		\includegraphics[width=0.6\textwidth]{figures/Views2.PNG}
-        		\label{Views2}
-    		\end{figure}
-    		\par Jangan lupa untuk menutup form dan pastikan name pada codingan views sesuai dengan data variable yang akan di execute pada function \verb|add_barang|
+    	\item Selanjutnya buat file baru, untuk view terhadap function tambah barang.
+\begin{lstlisting}
+<?php $this->load->view('page/header') ?>
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Tambah Data Barang</h1>
+                <ol class="breadcrumb">
+                  <li><?php echo anchor('web/index_barang', '<i class="fa fa-file-text fa-fw"></i> Data Barang'); ?></li>
+                  <li class="active"><i class="fa fa-tasks fa-fw"></i> Tambah Data Barang</li>
+                  
+                  <div style="clear: both;"></div>
+                </ol>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-11">
+                <?=form_open_multipart('web/add_barang/',['class'=>'form-horizontal'])?>
+
+                    <?php $error = form_error("nama_barang", "<p class='text-danger'>", '</p>'); ?>
+                    <div class="form-group <?php echo $error ? 'has-error' : '' ?>">
+                        <label class="col-sm-2 control-label">Nama barang</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="nama_barang" value="<?= set_value('nama_barang') ?>">
+                        </div>
+                    </div>
+                    <?php echo $error; ?>
+
+                    <?php $error = form_error("kategori_barang", "<p class='text-danger'>", '</p>'); ?>
+                    <div class="form-group <?php echo $error ? 'has-error' : '' ?>">
+                        <label class="col-sm-2 control-label">Kategori Barang</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" name="kategori_barang">
+                                <option value=''>--Pilih Kategori Barang--</option>
+                                <option value='Piping'>Piping</option>
+                                <option value='Mechanical'>Mechanical</option>
+                                <option value='Instrument'>Instrument</option>
+                                <option value='Electrical'>Electrical</option>
+                                <option value='Safety'>Safety</option>
+                            </select>
+                        </div>
+                    </div>
+                    <?php echo $error; ?>
+
+                    <?php $error = form_error("tingkat_kebutuhan", "<p class='text-danger'>", '</p>'); ?>
+                    <div class="form-group <?php echo $error ? 'has-error' : '' ?>">
+                        <label class="col-sm-2 control-label">Tingkat Kebutuhan</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" name="tingkat_kebutuhan">
+                                <option value=''>--Pilih Tingkat Kebutuhan--</option>
+                                <option value='1'>1 (Dibutuhkan Paling Akhir)</option>
+                                <option value='2'>2 (Dibutuhkan Setelah Point 3 Selesai)</option>
+                                <option value='3'>3 (Dibutuhkan Setelah Barang Utama Datang)</option>
+                                <option value='4'>4 (Dibutuhkan Paling Utama)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <?php echo $error; ?>
+
+                    <?php $error = form_error("jumlah_dalam_kategori", "<p class='text-danger'>", '</p>'); ?>
+                    <div class="form-group <?php echo $error ? 'has-error' : '' ?>">
+                        <label class="col-sm-2 control-label">Jumlah Dalam Kategori</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" name="jumlah_dalam_kategori">
+                                <option value=''>--Pilih Jumlah Dalam Kategori--</option>
+                                <option value='1'>Kurang Dari 10 Barang</option>
+                                <option value='2'>Kurang Dari 20 Barang</option>
+                                <option value='3'>Kurang Dari 30 Barang</option>
+                                <option value='4'>Kurang Dari 40 Barang</option>
+                                <option value='5'>Kurang Dari 50 Barang</option>
+                                <option value='6'>Kurang Dari 60 Barang</option>
+                                <option value='7'>Kurang Dari 70 Barang</option>
+                                <option value='8'>Kurang Dari 80 Barang</option>
+                            </select>
+                        </div>
+                    </div>
+                    <?php echo $error; ?>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary pull-right">Simpan</button>
+                        </div>
+                    </div>
+               </form>
+            </div>
+        </div>
+        
+    </div>
+<?php $this->load->view('page/footer') ?>
+
+\end{lstlisting}
+    		\par Jangan lupa untuk menutup form dan pastikan name pada codingan views sesuai dengan data variable yang akan di execute pada function \verb|add_barang| yang terdapat pada controller tadi.
     		
-    	\item Kemudian buat file baru untuk views edit data barang, pada edit barang, hal pertama yang harus dilakukan setelah menekan tombol edit barang adalah memanggil semua data yang ada pada table agar dapat diedit, berikut contoh pemanggilan data pada form edit data barang
-    		\begin{figure}[!htbp]
-        		\centering
-        		\includegraphics[width=0.5\textwidth]{figures/Views3.PNG}
-        		\label{Views3}
-    		\end{figure}
-    		\par Setelah memanggil dibawah codingan tersebut buat form untuk view edit data barang
-    		\begin{figure}[!htbp]
-        		\centering
-        		\includegraphics[width=0.5\textwidth]{figures/Views4.PNG}
-        		\label{Views4}
-    		\end{figure}
-    		\par Pastikan value terisi agar saat melakukan edit data yang diedit dapat terlihat dan pastikan pada name sesuai dengan field yang ada pada table dan function \verb|edit_barang|
+    	\item Kemudian buat file baru untuk views terhadap function edit data barang. Pada edit barang, hal pertama yang harus dilakukan setelah menekan tombol edit barang adalah memanggil semua data yang ada pada table agar dapat diedit, berikut contoh pemanggilan data pada form edit data barang
+\begin{lstlisting}
+<?php
+$kode_barang    = $barang->kode_barang;
+    if($this->input->post('is_submitted')){
+        $nama_barang            = set_value('nama_barang');
+        $kategori_barang        = set_value('kategori_barang');
+        $tingkat_kebutuhan      = set_value('tingkat_kebutuhan');
+        $jumlah_dalam_kategori  = set_value('jumlah_dalam_kategori');
+    }else{
+        $nama_barang            = $barang->nama_barang;
+        $kategori_barang        = $barang->kategori_barang;
+        $tingkat_kebutuhan      = $barang->tingkat_kebutuhan;
+        $jumlah_dalam_kategori  = $barang->jumlah_dalam_kategori;
+    }
+?>
+\end{lstlisting}
     		
-    	\item Simpan semua file tersebut dan jalankan aplikasi. Berikut tampilan CRUD dari codingan yang di buat
+    		\par Setelah memanggil variable yang akan diedit, dibawah codingan tersebut buat form untuk view function edit data barang
+\begin{lstlisting}
+<?php $this->load->view('page/header') ?>
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Tambah Data barang</h1>
+                <ol class="breadcrumb">
+                  <li><?php echo anchor('web/index_barang', '<i class="fa fa-file-text fa-fw"></i> Data Barang'); ?></li>
+                  <li class="active"><i class="fa fa-tasks fa-fw"></i> Edit Data Barang</li>
+                  <div style="clear: both;"></div>
+                </ol>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-11">
+                <?=form_open_multipart('web/edit_barang/' . $kode_barang,['class'=>'form-horizontal'])?>
+
+                    <?php $error = form_error("nama_barang", "<p class='text-danger'>", '</p>'); ?>
+                    <div class="form-group <?php echo $error ? 'has-error' : '' ?>">
+                        <label class="col-sm-2 control-label">Nama barang</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="nama_barang" value="<?= $nama_barang ?>">
+                        </div>
+                    </div>
+                    <?php echo $error; ?>
+
+                    <?php $error = form_error("kategori_barang", "<p class='text-danger'>", '</p>'); ?>
+                    <div class="form-group <?php echo $error ? 'has-error' : '' ?>">
+                        <label class="col-sm-2 control-label">Kategori barang</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" name="kategori_barang">
+                                <option value='<?= $kategori_barang ?>'><?= $kategori_barang ?></option>
+                                <option value='Piping'>Piping</option>
+                                <option value='Mechanical'>Mechanical</option>
+                                <option value='Instrument'>Instrument</option>
+                                <option value='Electrical'>Electrical</option>
+                                <option value='Safety'>Safety</option>
+                            </select>
+                        </div>
+                    </div>
+                    <?php echo $error; ?>
+
+                    <?php $error = form_error("tingkat_kebutuhan", "<p class='text-danger'>", '</p>'); ?>
+                    <div class="form-group <?php echo $error ? 'has-error' : '' ?>">
+                        <label class="col-sm-2 control-label">Tingkat Kebutuhan</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" name="tingkat_kebutuhan">
+                                <option value='<?= $tingkat_kebutuhan ?>'><?= $tingkat_kebutuhan ?></option>
+                                <option value='1'>1 (Dibutuhkan Paling Akhir)</option>
+                                <option value='2'>2 (Dibutuhkan Setelah Point 3 Selesai)</option>
+                                <option value='3'>3 (Dibutuhkan Setelah Barang Utama Datang)</option>
+                                <option value='4'>4 (Dibutuhkan Paling Utama)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <?php echo $error; ?>
+
+                    <?php $error = form_error("jumlah_dalam_kategori", "<p class='text-danger'>", '</p>'); ?>
+                    <div class="form-group <?php echo $error ? 'has-error' : '' ?>">
+                        <label class="col-sm-2 control-label">Jumlah Dalam Kategori</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" name="jumlah_dalam_kategori">
+                                <option value='<?= $jumlah_dalam_kategori ?>'><?= $jumlah_dalam_kategori ?></option>
+                                <option value='1'>Kurang Dari 10 Barang</option>
+                                <option value='2'>Kurang Dari 20 Barang</option>
+                                <option value='3'>Kurang Dari 30 Barang</option>
+                                <option value='4'>Kurang Dari 40 Barang</option>
+                                <option value='5'>Kurang Dari 50 Barang</option>
+                                <option value='6'>Kurang Dari 60 Barang</option>
+                                <option value='7'>Kurang Dari 70 Barang</option>
+                                <option value='8'>Kurang Dari 80 Barang</option>
+                            </select>
+                        </div>
+                    </div>
+                    <?php echo $error; ?>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary pull-right">Simpan</button>
+                        </div>
+                    </div>
+               </form>
+            </div>
+        </div>
+        
+    </div>
+<?php $this->load->view('page/footer') ?>
+\end{lstlisting}
+    		\par Pastikan value terisi agar saat melakukan edit data, yang diedit dapat terlihat dan pastikan pada name sesuai dengan field yang ada pada table dan function \verb|edit_barang| yang ada pada folder controller.
+    		
+    	\item Simpan semua file tersebut dan jalankan aplikasi ini. Berikut tampilan CRUD dari codingan yang di buat.
+    	\begin{enumerate}
+    	    \item Views Barang
     		\begin{figure}[!htbp]
         		\centering
-        		\caption{Tampilan Hasil MVC dan CRUD}
-        		\includegraphics[width=0.7\textwidth]{figures/Views5.png}
+        		\caption{Tampilan Hasil MVC dan CRUD (Views Barang)}
+        		\includegraphics[width=0.5\textwidth]{figures/Views5.png}
         		\label{Views5}
     		\end{figure}
+    		
+    		\item Views Tambah Barang
+    		\begin{figure}[!htbp]
+        		\centering
+        		\caption{Tampilan Hasil MVC dan CRUD (Tambah Barang)}
+        		\includegraphics[width=0.5\textwidth]{figures/Views6.png}
+        		\label{Views6}
+    		\end{figure}
+    		
+    		\item Views Edit Barang
+    		\begin{figure}[!htbp]
+        		\centering
+        		\caption{Tampilan Hasil MVC dan CRUD (Edit Barang)}
+        		\includegraphics[width=0.5\textwidth]{figures/Views7.png}
+        		\label{Views7}
+    		\end{figure}
+    	\end{enumerate}
     \end{enumerate}
 \end{enumerate}
