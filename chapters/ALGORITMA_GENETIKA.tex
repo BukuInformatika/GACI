@@ -5,7 +5,11 @@ Algoritma ini banyak digunakan dalam bidang fisika, biologi, ekonomi, sosiologi 
 \section{Implementasi Penjadwalan Algoritma Genetika di CodeIgniter}
 \par Membuat CRUD dan beberapa table yang akan digunakan seperti pada tahap yang dilakukan sebelumnya, maka untuk mengimplementasikan algoritma genetika yaitu dengan cara melakukan konfigurasi pada model, controller dan views, langkah implementasi algoritma genetika yaitu sebagai berikut:
 \begin{enumerate}
-    \item Model Algoritma Genetika, pada folder model buat file baru dengan nama \verb|MDL_Jadwal| dan isi codingan seperti berikut:
+    \item Model Algoritma Genetika
+    
+    \begin{enumerate}
+        \item Pada folder \textit{C:/xampp/htdocs/algoritmagenetika/application/models} buat file baru dengan nama \verb|MDL_Jadwal| dan isi codingan seperti berikut:
+        
 \begin{lstlisting}
 <?php
 class MDL_Jadwal extends CI_Model{
@@ -46,9 +50,12 @@ class MDL_Jadwal extends CI_Model{
 	}
 }
 \end{lstlisting}
-		\par Fungsinya adalah untuk memanggil semua table yang akan digunakan dalam algortima genetika. Pada codingan tersebut melakukan join terhadap beberapa table yang akan digunakan. Ingat pada saat melakukan join table pastikan table yang dibuat saling berelasi memiliki foreign key dan primary key pada masing-masing table.
+		\par Keterangan: Fungsinya adalah untuk memanggil semua table yang akan digunakan dalam algortima genetika. Pada codingan tersebut melakukan join terhadap beberapa table yang akan digunakan. Ingat pada saat melakukan join table pastikan table yang dibuat saling berelasi memiliki foreign key dan primary key pada masing-masing table.
+    \end{enumerate}
 		
-	\item Selanjutnya adalah membuat codingan pada controller, buat file dengan nama genetik.php. Pada file genetik.php tersebut didalamnya akan ada function seperti function ambildata, function inisialisasi, function cekfitness, function hitungfitness, function seleksi, function startcrossover, function mutase, dan function getindividu. Function tersebut dibuat secara berurut sesuai dengan urutan proses algoritma genetika.
+    \item Controller Algoritma Genetika
+    \begin{enumerate}
+	\item Selanjutnya adalah membuat codingan pada folder \textit{C/xampp/htdocs/algoritmagenetika/application/controllers}, buat file dengan nama genetik.php. Pada file genetik.php tersebut didalamnya akan ada function seperti function ambildata, function inisialisasi, function cekfitness, function hitungfitness, function seleksi, function startcrossover, function mutase, dan function getindividu. Function tersebut dibuat secara berurut sesuai dengan urutan proses algoritma genetika.
 	
 	\item Untuk function ambildata dilakukan select data barang, tahun, bulan dan data vendor untuk dijadikan sebuah chromosome dalam bentuk variable
 	
@@ -359,8 +366,11 @@ $data = array();
 }
 \end{lstlisting}
         \end{enumerate}
+    \end{enumerate}
         		
-    	\item Selanjutnya buat file baru pada folder application/views/\verb|index_jadwal| dan buat desain untuk tampilan hasil penjadwalan nanti. Dan buat beberapa button atau fungsi untuk dilemparkan ke function controller yang sudah dibuat tadi.
+        \item Views Algoritma Genetika
+        \begin{enumerate}
+    	\item Selanjutnya buat file baru dengan nama \verb|index_jadwal.php| pada folder \textit{C/xampp/htdocs/algoritmagenetika/application/views/web/jadwal/} dan buat desain untuk tampilan hasil penjadwalan nanti. Dan buat beberapa button atau fungsi untuk dilemparkan ke function controller yang sudah dibuat tadi.
 \begin{lstlisting}
 <?php $this->load->view('page/header') ?>
     <div id="page-wrapper">
@@ -474,7 +484,7 @@ $data = array();
 <?php $this->load->view('page/footer') ?>
 \end{lstlisting}
     	
-    	\item Setelah semua konfigurasi selesai, simpan file tersebut kemudian jalankan aplikasi algoritma genetika ini.
+    	\item Setelah semua konfigurasi selesai, simpan file tersebut kemudian jalankan aplikasi algoritma genetika dengan cara load link \textit{http/localhost/algoritmagenetika/web/indexjadwal} pada browser kesayangan anda.
     	
         \item Berikut hasil dari aplikasi penjadwalan algoritma genetika
     		\begin{figure}[!htbp]
@@ -483,4 +493,5 @@ $data = array();
         		\includegraphics[width=0.6\textwidth]{figures/GA15.png}
         		\label{GA15}
     		\end{figure}
+        \end{enumerate}
 \end{enumerate}
