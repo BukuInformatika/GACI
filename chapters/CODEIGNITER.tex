@@ -4,7 +4,7 @@ Codeigniter adalah sebuah framework untuk web yang dibuat dalam format PHP. Form
     \begin{enumerate}
         \item Pertama download Framework CodeIgniter di \textbf{\textit{https://www.codeigniter.com/}}
         
-	    \item Setelah mengunduh file CodeIgniter 3, ekstrak file tersebut menggunakan WinRAR atau 7Zip kedalam folder htdocs jika kamu menggunakan XAMPP atau \textit{/var/www/html}. jika kamu menggunakan Apache2 Standalone, setelah itu ubahlan nama foldernya menjadi namaapplikasi.
+	    \item Setelah mengunduh file CodeIgniter 3, ekstrak file tersebut menggunakan WinRAR atau 7Zip kedalam folder \textit{C:/xampp/htdocs} jika kamu menggunakan XAMPP atau \textit{/var/www/html}. jika kamu menggunakan Apache2 Standalone, setelah itu ubahlan nama foldernya menjadi namaapplikasi.
 	    
 	    \item Sekarang silahkan Kamu coba akses URL \textbf{\textit{http://localhost/ namaaplikasi/}} melalui browser Kamu, akan langsung ditampilkan halaman awal Codeigniter yang berarti Instalasi telah berhasil.
 		\begin{figure}[!htbp]
@@ -33,7 +33,7 @@ Codeigniter adalah sebuah framework untuk web yang dibuat dalam format PHP. Form
 \end{enumerate}
 
 \section{Konfigurasi CodeIgniter 3}
-Di dalam folder application/config/ terdapat berbagai macam file konfigurasi yang dapat kita atur sendiri nantinya.
+Di dalam folder config pada CodeIgniter terdapat berbagai macam file konfigurasi yang dapat kita atur sendiri nantinya. File tersebut dapat ditemukan pada folder \textit{C:/xampp/htdocs/algoritmagenetika/application/config/}.
 \begin{enumerate}
     \item \textbf{autoload.php}, digunakan untuk menambahkan package, libraries, drivers, helper, atau custom config lainnya agar secara otomatis diload oleh codeigniter.
     \item \textbf{config.php}, digunakan untuk membuat pengaturan dasar untuk web app codeigniter anda, seperti \verb|base_url|, index page, cookie, proxy dan lain lain.
@@ -103,7 +103,7 @@ $route['404_override'] = '';
 \end{enumerate}
 
 \section{Konfigurasi Bootstrap dan Template CodeIgniter 3}
-Ada berbagai macam konfigurasi bootstrap dan template terhadap CodeIgniter, baik secara install maupun dengan cara konfigurasi sendiri. Pada tutorial kali ini saya ingin menerapkan bootstrap dan template di CodeIgniter dengan cara cepat. Untuk yang ingin menggunakan cara instan, bisa dengan cara mengunjungi website w3layout.com dan website yang menyediakan assets template dan bootstrap siap pakai. Berikut cara konfigurasi template dan bootstrap pada CodeIgniter:
+Ada berbagai macam konfigurasi bootstrap dan template terhadap CodeIgniter, baik secara install maupun dengan cara konfigurasi sendiri. Pada tutorial kali ini saya ingin menerapkan bootstrap dan template di CodeIgniter dengan cara cepat. Untuk yang ingin menggunakan cara instan, bisa dengan cara mengunjungi website \textit{w3layout.com} dan website yang menyediakan assets template dan bootstrap siap pakai. Berikut cara konfigurasi template dan bootstrap pada CodeIgniter:
 \begin{enumerate}
     \item Siapkan template bootstrap yang sudah didownload
     \item Extrak file tersebut jika dalam bentuk .rar atau .zip
@@ -114,8 +114,8 @@ Ada berbagai macam konfigurasi bootstrap dan template terhadap CodeIgniter, baik
     		\label{TBCI1}
 		\end{figure}
 		
-	\item Setelah menkopi file kedalam folder assets, langkas selanjutnya adalah memanggil config tersebut. Jangan lupa untuk membuat header dan footer ketika membuat website guna untuk mempermudah apabila terjadi perubahan terhadap beberapa menu.
-	\item Copy isi dari index.html yang ada dalam assets kemudian buat file di dalam application/views/namafile.php dengan format .php dan pastekan dalam file tersebut.
+	\item Setelah menkopi file kedalam folder assets, langka selanjutnya adalah memanggil config tersebut. Jangan lupa untuk membuat header dan footer ketika membuat website guna untuk mempermudah apabila terjadi perubahan terhadap beberapa menu.
+	\item Copy isi dari index.html yang ada dalam assets kemudian buat file di dalam follder \textit{C:/xampp/htdocs/algoritmagenetika/application/views/dasboard.php} dengan format .php dan pastekan dalam file tersebut.
 	\item Kemudian pisahkan antara header dan footer aplikasi anda.
 	\item Pertama lakukan konfigurasi terhadap header dengan cara memanggil link dan script yang sudah di copy di dalam assets, berikut contoh pemanggilanya:
 \begin{lstlisting}
@@ -323,8 +323,8 @@ Ada berbagai macam konfigurasi bootstrap dan template terhadap CodeIgniter, baik
 \end{lstlisting}
 		\par Lakukan pemanggilan terhadap semua code yang berbau href dan src dengan mengisikan kodingan seperti echo \verb|base_url/assets/link_yg_dituju|, terlihat seperti pada codingan diatas. Lakukan hal yang sama terhadap file footer.php. Setelah itu simpan.
 		
-	\item Selanjutnya membuat file untuk tampilan awal yaitu index.php atau dashboard.php
-	\item Edit beberapa codingan yang sudah dipastekan tadi dari assets/index.html ke application/views/dasboard.php sesuai dengan tampilan yang diinginkan. Apabila memisahkan header dan footer jangan lupa untuk memanggil header footer. Berikut codingan full dari dasboard.php:
+	\item Selanjutnya membuat file untuk tampilan awal yaitu dashboard.php
+	\item Edit codingan yang sudah dipastekan pada file dashboard.php yang ada pada folder \textit{C:/xampp/htdocs/algoritmagenetika/application/views/} sesuai tampilan yang diinginkan. Apabila memisahkan file header dan footer jangan lupa untuk memanggil file tersebut. Berikut codingan full dari dasboard.php:
 \begin{lstlisting}
 <?php $this->load->view('page/header') ?>
 
@@ -431,7 +431,7 @@ Ada berbagai macam konfigurasi bootstrap dan template terhadap CodeIgniter, baik
 
 <?php $this->load->view('page/footer') ?>
 \end{lstlisting}
-	    \par Load view berarti meload file yang ada di dalam folder view, dalam artian codingan diatas akan meload file header yang ada di folder application/views/page/header, begitu pun dengan file footer.php. Simpan semua konfigurasi dan coba jalankan.
+	    \par Load view berarti meload file yang ada di dalam folder view, dalam artian codingan diatas akan meload file header yang ada di folder \textit{application/views/page/header.php}, begitu juga dengan file \textit{footer.php}. Simpan semua konfigurasi kemudian  jalankan aplikasi algoritmagenetika tersebut, dengan cara ketik link \textit{http://localhost/algoritmagenetika/} di browser kesayangan anda.
 	    
     \item Berikut hasil dari codingan dashboard.php.
 		\begin{figure}[!htbp]
@@ -447,8 +447,8 @@ Ada berbagai macam konfigurasi bootstrap dan template terhadap CodeIgniter, baik
     \item Konfigurasi Model
     \begin{enumerate}
         \item Buat table sesuai dengan kebutuhan aplikasi
-        \item Kemudian buat file baru dengan format .php pada application/models
-        \item Pada tahap inin saya akan membuat model untuk table barang, berikut codingan yang saya gunakan:
+        \item Kemudian buat file baru dengan nama \verb|MDL_Barang.php| dalam folder \textit{C:/xampp/htdocs/algoritmagenetika/application/models/}.
+        \item Pada tahap ini saya akan membuat model untuk table barang, berikut codingan yang saya gunakan:
 \begin{lstlisting}
 <?php
 class MDL_Barang extends CI_Model{
@@ -519,8 +519,8 @@ class MDL_Barang extends CI_Model{
     
     \item Konfigurasi Controller
     \begin{enumerate}
-        \item Buat file baru dengan format .php di folder application/controller, kemudian buat beberapa function crud
-        \item dalam file ini, load semua model agar semua function disatukan dalam satu file, seperti pada codingan dibawah:
+        \item Buat file baru dengan nama web pada folder \textit{C/xampp/htdocs/algoritmagenetika/application/controllers/}, kemudian buat beberapa function crud.
+        \item Dalam file web.php, load semua model agar semua function disatukan dalam satu file, seperti pada codingan dibawah:
 \begin{lstlisting}
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Web extends CI_Controller
@@ -611,7 +611,7 @@ public function delete_barang($kode_barang)
     
     \item Konfigurasi Views
     \begin{enumerate}
-        \item Buat file  baru pada application/views dengan format .php kemdian buat desain untuk meanmpilakn data dari table barang, berikut contoh codingan untuk vies data barang
+        \item Buat file dengan nama \verb|index_barang.php| pada folder \textit{C/xampp/htdocs/algoritmagenetika/application/views/web/barang/} kemdian buat desain untuk menampilkan data dari table barang, berikut contoh codingan untuk vies data barang.
 \begin{lstlisting}
 <?php $this->load->view('page/header') ?>
     <div id="page-wrapper">
@@ -664,7 +664,7 @@ public function delete_barang($kode_barang)
 <?php $this->load->view('page/footer') ?>
 \end{lstlisting}
     		
-    	\item Selanjutnya buat file baru, untuk view terhadap function tambah barang.
+    	\item Selanjutnya membuat file baru didalam folder yang sama, dengan nama file \verb|form_add_barang.php|, untuk view terhadap function tambah barang.
 \begin{lstlisting}
 <?php $this->load->view('page/header') ?>
     <div id="page-wrapper">
@@ -758,7 +758,7 @@ public function delete_barang($kode_barang)
 \end{lstlisting}
     		\par Jangan lupa untuk menutup form dan pastikan name pada codingan views sesuai dengan data variable yang akan di execute pada function \verb|add_barang| yang terdapat pada controller tadi.
     		
-    	\item Kemudian buat file baru untuk views terhadap function edit data barang. Pada edit barang, hal pertama yang harus dilakukan setelah menekan tombol edit barang adalah memanggil semua data yang ada pada table agar dapat diedit, berikut contoh pemanggilan data pada form edit data barang
+    	\item Masih dalam folder yang saya, buat file baru untuk views terhadap function edit data barang dengan nama \verb|form_edit_barang.php|. Pada edit barang, hal pertama yang harus dilakukan setelah menekan tombol edit barang adalah memanggil semua data yang ada pada table agar dapat diedit, berikut contoh pemanggilan data pada form edit data barang.
 \begin{lstlisting}
 <?php
 $kode_barang    = $barang->kode_barang;
@@ -776,7 +776,7 @@ $kode_barang    = $barang->kode_barang;
 ?>
 \end{lstlisting}
     		
-    		\par Setelah memanggil variable yang akan diedit, dibawah codingan tersebut buat form untuk view function edit data barang
+    		\par Setelah memanggil variable yang akan diedit, dibawah codingan tersebut buat form untuk view function edit data barang.
 \begin{lstlisting}
 <?php $this->load->view('page/header') ?>
     <div id="page-wrapper">
@@ -866,15 +866,15 @@ $kode_barang    = $barang->kode_barang;
     </div>
 <?php $this->load->view('page/footer') ?>
 \end{lstlisting}
-    		\par Pastikan value terisi agar saat melakukan edit data, yang diedit dapat terlihat dan pastikan pada name sesuai dengan field yang ada pada table dan function \verb|edit_barang| yang ada pada folder controller.
+    		\par Pastikan value terisi, agar saat melakukan edit data, yang diedit dapat terlihat dan pastikan pada name sesuai dengan field yang ada pada table dan function \verb|edit_barang| yang ada pada folder controller.
     		
-    	\item Simpan semua file tersebut dan jalankan aplikasi ini. Berikut tampilan CRUD dari codingan yang di buat.
+    	\item Simpan semua file tersebut kemudian jalankan aplikasi ini dengan load link \textit{http://localhost/algoritmagenetika/} pada browser kesayangan anda (jangan lupa untuk jalankan apache dan mysql xampp terlebih dahulu). Berikut tampilan CRUD dari codingan yang di buat.
     	\begin{enumerate}
     	    \item Views Barang
     		\begin{figure}[!htbp]
         		\centering
         		\caption{Tampilan Hasil MVC dan CRUD (Views Barang)}
-        		\includegraphics[width=0.5\textwidth]{figures/Views5.png}
+        		\includegraphics[width=0.4\textwidth]{figures/Views5.png}
         		\label{Views5}
     		\end{figure}
     		
@@ -882,7 +882,7 @@ $kode_barang    = $barang->kode_barang;
     		\begin{figure}[!htbp]
         		\centering
         		\caption{Tampilan Hasil MVC dan CRUD (Tambah Barang)}
-        		\includegraphics[width=0.5\textwidth]{figures/Views6.png}
+        		\includegraphics[width=0.4\textwidth]{figures/Views6.png}
         		\label{Views6}
     		\end{figure}
     		
@@ -890,7 +890,7 @@ $kode_barang    = $barang->kode_barang;
     		\begin{figure}[!htbp]
         		\centering
         		\caption{Tampilan Hasil MVC dan CRUD (Edit Barang)}
-        		\includegraphics[width=0.5\textwidth]{figures/Views7.png}
+        		\includegraphics[width=0.4\textwidth]{figures/Views7.png}
         		\label{Views7}
     		\end{figure}
     	\end{enumerate}
